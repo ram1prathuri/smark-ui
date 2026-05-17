@@ -6,9 +6,9 @@ frontend:
         - npm ci
     build:
       commands:
-        - npm run build -- --configuration=production
+        - npm run build
   artifacts:
-    baseDirectory: dist/sample
+    baseDirectory: dist/sample/browser
     files:
       - '**/*'
   cache:
