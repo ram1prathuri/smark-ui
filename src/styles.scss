@@ -1,0 +1,151 @@
+// ============================================================
+// GLOBAL STYLES — Angular Material 3 + Dynamic Theming
+// ============================================================
+@use '@angular/material' as mat;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap');
+
+// ── 1. Seed Angular Material's base theme (fallback if CSS vars not overridden)
+html {
+  height: 100%;
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$azure-palette,
+        tertiary: mat.$violet-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
+}
+
+// ── 2. Dynamic Theme CSS Variables (overrideable at runtime via ThemeService)
+:root {
+  // Primary palette overrides
+  --app-primary: #5C6BC0;
+  --app-primary-light: #8e99f3;
+  --app-primary-dark: #26418f;
+  --app-primary-contrast: #ffffff;
+
+  // Secondary / Accent palette
+  --app-accent: #7E57C2;
+  --app-accent-light: #b085f5;
+  --app-accent-dark: #4d2c91;
+  --app-accent-contrast: #ffffff;
+
+  // Surface / Background
+  --app-surface: #f5f5f7;
+  --app-surface-card: #ffffff;
+  --app-bg: #eef0f8;
+
+  // Text
+  --app-on-primary: #ffffff;
+  --app-on-accent: #ffffff;
+  --app-text-primary: #1a1a2e;
+  --app-text-secondary: #5a5a7a;
+  --app-text-muted: #9090b0;
+
+  // Border / Dividers
+  --app-border: #e0e0ef;
+  --app-border-radius: 12px;
+  --app-border-radius-sm: 8px;
+  --app-border-radius-lg: 20px;
+
+  // Sidebar
+  --app-sidebar-width: 260px;
+  --app-sidebar-collapsed-width: 68px;
+  --app-header-height: 64px;
+
+  // Shadows
+  --app-shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.06);
+  --app-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --app-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+
+  // Transitions
+  --app-transition: 0.25s ease;
+  --app-transition-slow: 0.4s ease;
+}
+
+// ── 3. Dark Mode
+.dark-mode {
+  --app-surface: #12121e;
+  --app-surface-card: #1e1e30;
+  --app-bg: #0d0d1a;
+  --app-text-primary: #e8e8f5;
+  --app-text-secondary: #a0a0c0;
+  --app-text-muted: #606080;
+  --app-border: #2a2a45;
+  color-scheme: dark;
+}
+
+// ── 4. Body defaults
+body {
+  color-scheme: light;
+  background-color: var(--app-bg);
+  color: var(--app-text-primary);
+  font-family: 'Inter', 'Roboto', sans-serif;
+  margin: 0;
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  &.dark-mode {
+    color-scheme: dark;
+  }
+}
+
+// ── 5. Scrollbar styling
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--app-border);
+  border-radius: 3px;
+  &:hover { background: var(--app-text-muted); }
+}
+
+// ── 6. Utility classes
+.flex { display: flex; }
+.flex-col { display: flex; flex-direction: column; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.gap-4 { gap: 16px; }
+.gap-2 { gap: 8px; }
+.w-full { width: 100%; }
+.text-muted { color: var(--app-text-muted); font-size: 13px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+
+// ── 7. Animation utilities
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+.animate-fadeInUp   { animation: fadeInUp 0.4s ease both; }
+.animate-slideLeft  { animation: slideInLeft 0.3s ease both; }
+
+// ── 8. Material overrides to pick up CSS variables
+.mat-toolbar.app-header {
+  background: var(--app-primary) !important;
+  color: var(--app-primary-contrast) !important;
+}
+
+.mat-sidenav {
+  background: var(--app-surface-card) !important;
+  border-right: 1px solid var(--app-border) !important;
+}
+
+.mat-sidenav-content {
+  background: var(--app-bg) !important;
+}
