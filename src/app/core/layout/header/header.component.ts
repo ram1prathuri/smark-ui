@@ -30,7 +30,7 @@ import { AuthService } from '../../services/auth.service';
             <span class="brand-icon">◈</span>
           </div>
           <div class="brand-text">
-            <span class="brand-name">DesignSys</span>
+            <span class="brand-name">SmarkUI</span>
             <span class="brand-tagline">Component Library</span>
           </div>
         </a>

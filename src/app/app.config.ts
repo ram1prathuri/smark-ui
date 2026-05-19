@@ -11,7 +11,7 @@ import { usersReducer } from './core/store/users/users.reducer';
 import { UsersEffects } from './core/store/users/users.effects';
 import { postsReducer } from './core/store/posts/posts.reducer';
 import { PostsEffects } from './core/store/posts/posts.effects';
-
+//==========s7cy1j8b4FRVY5JXTY5uYP3huHIRm0GI=================//
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),

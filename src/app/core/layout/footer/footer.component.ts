@@ -8,7 +8,7 @@ import { RouterLink } from '@angular/router';
   template: `
     <footer class="app-footer" role="contentinfo">
       <div class="footer-inner">
-        <span class="footer-copy">© 2026 <strong>DesignSys</strong>. All rights reserved.</span>
+        <span class="footer-copy">© 2026 <strong>SmarkUI</strong>. All rights reserved.</span>
         <div class="footer-links" role="list">
           <a routerLink="/" class="footer-link" role="listitem">Home</a>
           <a routerLink="/theme-settings" class="footer-link" role="listitem">Themes</a>

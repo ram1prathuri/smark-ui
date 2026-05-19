@@ -19,7 +19,7 @@ export class UiModalService {
   private dialog = inject(MatDialog);
 
   /**
-   * Opens a standard confirmation/alert modal using the DesignSys wrapper.
+   * Opens a standard confirmation/alert modal using the SmarkUI wrapper.
    */
   openConfirm(options: UiModalOptions): MatDialogRef<UiModalWrapperComponent> {
     const config: MatDialogConfig = {

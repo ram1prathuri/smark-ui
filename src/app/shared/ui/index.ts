@@ -15,3 +15,6 @@ export * from './ui-modal/ui-modal.component';
 export * from './ui-modal/ui-modal.service';
 export * from './ui-popover/ui-popover.component';
 export * from './ui-popover/ui-popover.directive';
+export * from './ui-tree/ui-tree.component';
+export * from './ui-tree/ui-tree-node.component';
+export * from './ui-tree/ui-tree.models';

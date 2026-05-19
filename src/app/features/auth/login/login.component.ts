@@ -24,7 +24,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
             <mat-icon>layers</mat-icon>
           </div>
           <h1>Welcome Back</h1>
-          <p>Sign in to access the DesignSys Dashboard</p>
+          <p>Sign in to access the SmarkUI Dashboard</p>
         </div>
 
         <ui-card variant="elevated" class="login-card">

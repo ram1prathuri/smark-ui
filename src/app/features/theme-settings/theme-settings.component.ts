@@ -184,7 +184,7 @@ import { CommonModule } from '@angular/common';
               <div class="preview-mini-header" [style.background]="themeService.theme().primary">
                 <div class="pmh-brand" aria-hidden="true">
                   <span class="pmh-logo">◈</span>
-                  <span class="pmh-name">DesignSys</span>
+                  <span class="pmh-name">SmarkUI</span>
                 </div>
                 <div class="pmh-actions" aria-hidden="true">
                   <span class="pmh-icon-btn"></span>
@@ -398,21 +398,21 @@ import { CommonModule } from '@angular/common';
 })
 export class ThemeSettingsComponent {
   themeService = inject(ThemeService);
-  snackBar     = inject(MatSnackBar);
+  snackBar = inject(MatSnackBar);
 
   presets = PRESET_THEMES;
 
   customPrimaryVal = this.themeService.theme().primary;
-  customAccentVal  = this.themeService.theme().accent;
-  customPrimary    = signal(this.themeService.theme().primary);
-  customAccent     = signal(this.themeService.theme().accent);
+  customAccentVal = this.themeService.theme().accent;
+  customPrimary = signal(this.themeService.theme().primary);
+  customAccent = signal(this.themeService.theme().accent);
 
   applyPreset(preset: ThemeColor): void {
     this.themeService.applyPreset(preset);
     this.customPrimary.set(preset.primary);
     this.customAccent.set(preset.accent);
     this.customPrimaryVal = preset.primary;
-    this.customAccentVal  = preset.accent;
+    this.customAccentVal = preset.accent;
   }
 
   onCustomPrimaryChange(e: Event): void {
@@ -440,7 +440,7 @@ export class ThemeSettingsComponent {
     this.customPrimary.set(PRESET_THEMES[0].primary);
     this.customAccent.set(PRESET_THEMES[0].accent);
     this.customPrimaryVal = PRESET_THEMES[0].primary;
-    this.customAccentVal  = PRESET_THEMES[0].accent;
+    this.customAccentVal = PRESET_THEMES[0].accent;
     this.snackBar.open('Theme reset to default.', 'OK', { duration: 2000 });
   }
 }

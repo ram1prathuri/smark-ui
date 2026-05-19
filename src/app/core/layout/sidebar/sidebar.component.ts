@@ -7,34 +7,7 @@ import { CommonModule } from '@angular/common';
 import { ThemeService } from '../../services/theme.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
-export interface NavItem {
-  id: string;
-  label: string;
-  icon: string;
-  route?: string;
-  badge?: string | number;
-  children?: NavItem[];
-  expanded?: boolean;
-}
-
-const NAV_ITEMS: NavItem[] = [
-  { id: 'dashboard', label: 'Dashboard', icon: 'dashboard', route: '/' },
-  {
-    id: 'resources', label: 'Resources', icon: 'folder',
-    expanded: false,
-    children: [
-      { id: 'users', label: 'Users', icon: 'people', route: '/users' },
-      { id: 'posts', label: 'Posts', icon: 'article', route: '/posts' },
-    ]
-  },
-  { id: 'components', label: 'Components', icon: 'widgets', route: '/components' },
-  { id: 'typography', label: 'Typography', icon: 'text_fields', route: '/typography' },
-  { id: 'colors', label: 'Colors & Theme', icon: 'palette', route: '/theme-settings', badge: 'NEW' },
-  { id: 'forms', label: 'Forms', icon: 'dynamic_form', route: '/forms' },
-  { id: 'tables', label: 'Tables', icon: 'table_chart', route: '/tables' },
-  { id: 'charts', label: 'Charts', icon: 'bar_chart', route: '/charts' },
-  { id: 'settings', label: 'Settings', icon: 'settings', route: '/settings' },
-];
+import { appNavItems, NavItem } from '../../config/routes.config';
 
 @Component({
   selector: 'app-sidebar',
@@ -245,7 +218,7 @@ const NAV_ITEMS: NavItem[] = [
 })
 export class SidebarComponent {
   collapsed = signal(false);
-  navItems = NAV_ITEMS;
+  navItems = appNavItems;
   themeService = inject(ThemeService);
 
   toggleExpand(item: NavItem): void {

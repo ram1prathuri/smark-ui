@@ -12,6 +12,8 @@ import { UiModalComponent } from '../../shared/ui/ui-modal/ui-modal.component';
 import { UiModalService } from '../../shared/ui/ui-modal/ui-modal.service';
 import { UiPopoverComponent } from '../../shared/ui/ui-popover/ui-popover.component';
 import { UiPopoverDirective } from '../../shared/ui/ui-popover/ui-popover.directive';
+import { UiTreeComponent } from '../../shared/ui/ui-tree/ui-tree.component';
+import { UiTreeNode } from '../../shared/ui/ui-tree/ui-tree.models';
 import { FormControl } from '@angular/forms';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
@@ -23,7 +25,7 @@ import { MatIconModule } from '@angular/material/icon';
     UiButtonComponent, UiCardComponent, UiBadgeComponent, UiChipComponent,
     UiAlertComponent, UiDividerComponent, UiSpinnerComponent, UiInputComponent,
     UiStatCardComponent, MatChipsModule, UiModalComponent, UiPopoverComponent,
-    UiPopoverDirective, MatIconModule
+    UiPopoverDirective, MatIconModule, UiTreeComponent
   ],
   template: `
     <div class="comp-page animate-fadeInUp">
@@ -77,6 +79,12 @@ import { MatIconModule } from '@angular/material/icon';
           </ui-popover>
         </div>
       </ui-card>
+
+      <!-- Tree View -->
+      <ui-card title="Tree View" subtitle="Hierarchical animated data visualization" headerIcon="account_tree" variant="elevated">
+        <ui-tree [data]="demoTreeData"></ui-tree>
+      </ui-card>
+
       <!-- Buttons -->
       <ui-card title="ui-button" subtitle="Button variants, sizes, icons, and loading states" headerIcon="smart_button" variant="elevated">
         <div class="demo-section">
@@ -233,4 +241,46 @@ export class ComponentsComponent {
       console.log('Modal result:', result);
     });
   }
+
+  demoTreeData: UiTreeNode[] = [
+    {
+      id: 'root-1',
+      label: 'Design System Workspace',
+      icon: 'folder',
+      expanded: true,
+      children: [
+        {
+          id: 'components',
+          label: 'Components',
+          icon: 'category',
+          expanded: true,
+          children: [
+            { id: 'btn', label: 'Button', icon: 'smart_button' },
+            { id: 'card', label: 'Card', icon: 'crop_square' },
+            { id: 'input', label: 'Input', icon: 'edit' }
+          ]
+        },
+        {
+          id: 'styles',
+          label: 'Styles & Theming',
+          icon: 'palette',
+          children: [
+            { id: 'colors', label: 'Colors' },
+            { id: 'typography', label: 'Typography' }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'root-2',
+      label: 'Documentation (Custom Colors)',
+      icon: 'description',
+      color: '#4caf50', // Custom green
+      expanded: false,
+      children: [
+        { id: 'getting-started', label: 'Getting Started', color: '#ff9800' },
+        { id: 'api', label: 'API Reference', color: '#2196f3' }
+      ]
+    }
+  ];
 }
