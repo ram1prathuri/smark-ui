@@ -14,7 +14,9 @@ const COMPONENT_REGISTRY: Record<string, () => Promise<any>> = {
   'posts': () => import('../../features/posts/posts.component').then(m => m.PostsComponent),
   'builder': () => import('../../features/page-builder/page-builder.component').then(m => m.PageBuilderComponent),
   'tickers': () => import('../../features/tickers/tickers.component').then(m => m.TickersComponent),
-  'dynamic-sample': () => import('../dynamic-renderer/dynamic-page.component').then(m => m.DynamicPageComponent)
+  'dynamic-sample': () => import('../dynamic-renderer/dynamic-page.component').then(m => m.DynamicPageComponent),
+  'infinite': () => import('../../features/infinite-scroll/infinite-scroll').then(m => m.InfiniteScroll),
+
 };
 
 // 2. Generic Node Interface representing single point of truth for route + navigation
@@ -36,6 +38,13 @@ export interface AppRouteConfigNode {
 // 3. Centralized JSON-like schema configuration
 export const APP_ROUTES_MENU_CONFIG: AppRouteConfigNode[] = [
   {
+    id: 'infinite',
+    path: 'infinite',
+    title: 'Infinite Scroll — SmarkUI',
+    componentKey: 'infinite',
+    menu: { label: 'Infinite Scroll', icon: 'scroll', route: '/infinite' }
+  },
+  {
     id: 'dashboard',
     path: '',
     title: 'Dashboard — SmarkUI',
@@ -47,7 +56,7 @@ export const APP_ROUTES_MENU_CONFIG: AppRouteConfigNode[] = [
     path: 'covid',
     title: 'Dashboard — CovidBoard',
     componentKey: 'covid',
-    menu: { label: 'Covid', icon: 'dashboard', route: '/covid' }
+    menu: { label: 'Covid', icon: 'covid', route: '/covid' }
   },
   {
     id: 'resources',
@@ -172,6 +181,7 @@ export const APP_ROUTES_MENU_CONFIG: AppRouteConfigNode[] = [
     componentKey: 'dashboard',
     menu: { label: 'Settings', icon: 'settings', route: '/settings' }
   }
+
 ];
 
 // 4. Dynamic Router compiler

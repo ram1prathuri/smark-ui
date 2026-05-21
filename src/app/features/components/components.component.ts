@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { UiButtonComponent } from '../../shared/ui/ui-button/ui-button.component';
+import { UiTextComponent } from '../../shared/ui/ui-text/ui-text.component';
 import { UiCardComponent } from '../../shared/ui/ui-card/ui-card.component';
 import { UiBadgeComponent } from '../../shared/ui/ui-badge/ui-badge.component';
 import { UiChipComponent } from '../../shared/ui/ui-chip/ui-chip.component';
@@ -25,7 +26,7 @@ import { MatIconModule } from '@angular/material/icon';
     UiButtonComponent, UiCardComponent, UiBadgeComponent, UiChipComponent,
     UiAlertComponent, UiDividerComponent, UiSpinnerComponent, UiInputComponent,
     UiStatCardComponent, MatChipsModule, UiModalComponent, UiPopoverComponent,
-    UiPopoverDirective, MatIconModule, UiTreeComponent
+    UiPopoverDirective, MatIconModule, UiTreeComponent, UiTextComponent
   ],
   template: `
     <div class="comp-page animate-fadeInUp">
@@ -69,11 +70,11 @@ import { MatIconModule } from '@angular/material/icon';
 
           <!-- Popover Template -->
           <ui-popover #demoPopover>
-            <div style="padding: 8px;">
-              <h4 style="margin: 0 0 8px; font-size: 14px; font-weight: 600;">Quick Action</h4>
-              <p style="margin: 0 0 12px; font-size: 13px; color: var(--app-text-muted);">
+            <div style="padding: 8px; min-width: 180px;">
+              <ui-text variant="h6" weight="semibold" style="margin-bottom: 4px;">Quick Action</ui-text>
+              <ui-text variant="caption" color="muted" style="margin-bottom: 12px;">
                 This is a rich popover powered by CDK Overlay.
-              </p>
+              </ui-text>
               <ui-button variant="primary" size="sm" [fullWidth]="true">Action</ui-button>
             </div>
           </ui-popover>

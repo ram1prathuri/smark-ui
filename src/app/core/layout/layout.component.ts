@@ -18,6 +18,11 @@ import { FooterComponent } from './footer/footer.component';
         <!-- Sidebar -->
         <app-sidebar #sidebar />
 
+        <!-- Mobile Sidebar Overlay Backdrop -->
+        @if (!sidebar.collapsed()) {
+          <div class="sidebar-overlay" (click)="sidebar.collapsed.set(true)"></div>
+        }
+
         <!-- Main Content Area -->
         <main class="shell-main" role="main" id="main-content">
           <div class="content-wrapper">
@@ -66,9 +71,32 @@ import { FooterComponent } from './footer/footer.component';
         left: 0;
         top: var(--app-header-height);
         bottom: 0;
-        z-index: 900;
+        z-index: 1000;
         box-shadow: var(--app-shadow-lg);
+        transition: transform var(--app-transition-slow) cubic-bezier(0.4, 0, 0.2, 1);
+        transform: translateX(0);
       }
+
+      app-sidebar.collapsed {
+        transform: translateX(-100%);
+      }
+
+      .sidebar-overlay {
+        position: fixed;
+        top: var(--app-header-height);
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(4px);
+        z-index: 990;
+        animation: fadeIn 0.2s ease-out;
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
   `]
 })

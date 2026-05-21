@@ -2,13 +2,14 @@ import { Component, input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
+import { UiTextComponent } from '../ui-text/ui-text.component';
 
 export type UiCardVariant = 'default' | 'elevated' | 'outlined' | 'glass' | 'gradient';
 
 @Component({
   selector: 'ui-card',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatIconModule],
+  imports: [CommonModule, MatCardModule, MatIconModule, UiTextComponent],
   template: `
     <mat-card class="ui-card" [class]="'ui-card--' + variant()" [class.ui-card--hoverable]="hoverable()">
       @if (title() || subtitle() || headerIcon()) {
@@ -18,9 +19,13 @@ export type UiCardVariant = 'default' | 'elevated' | 'outlined' | 'glass' | 'gra
               <mat-icon>{{ headerIcon() }}</mat-icon>
             </div>
           }
-          <mat-card-title-group>
-            @if (title()) { <mat-card-title class="card-title">{{ title() }}</mat-card-title> }
-            @if (subtitle()) { <mat-card-subtitle class="card-subtitle">{{ subtitle() }}</mat-card-subtitle> }
+          <mat-card-title-group style="display: flex; flex-direction: column; width: 100%;">
+            @if (title()) {
+              <ui-text variant="h6" weight="bold" class="card-title">{{ title() }}</ui-text>
+            }
+            @if (subtitle()) {
+              <ui-text variant="caption" color="muted" class="card-subtitle">{{ subtitle() }}</ui-text>
+            }
           </mat-card-title-group>
           <div class="card-header-actions">
             <ng-content select="[card-actions-header]" />
@@ -124,6 +129,13 @@ export type UiCardVariant = 'default' | 'elevated' | 'outlined' | 'glass' | 'gra
 
     .ui-card-content {
       padding: 20px !important;
+    }
+
+    :host-context(.dark-mode) {
+      .ui-card--glass {
+        background: rgba(30, 30, 48, 0.6) !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      }
     }
   `]
 })

@@ -103,7 +103,7 @@ export type UiButtonSize = 'sm' | 'md' | 'lg';
         background: transparent;
         color: var(--app-text-secondary);
         &:hover:not(:disabled) {
-          background: rgba(0,0,0,0.05);
+          background: var(--app-border);
           color: var(--app-text-primary);
         }
       }

@@ -9,10 +9,22 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 
 import { appNavItems, NavItem } from '../../config/routes.config';
 
+const SPRITE_ICONS = new Set([
+  'dashboard',
+  'covid',
+  'trending_up',
+  'dashboard_customize',
+  'layers',
+  'settings'
+]);
+
 @Component({
   selector: 'app-sidebar',
   standalone: true,
   imports: [CommonModule, RouterLink, RouterLinkActive, MatIconModule, MatTooltipModule, MatRippleModule],
+  host: {
+    '[class.collapsed]': 'collapsed()'
+  },
   template: `
     <aside class="sidebar" [class.collapsed]="collapsed()" role="navigation" aria-label="Main navigation">
       <!-- Collapse Toggle -->
@@ -58,7 +70,13 @@ import { appNavItems, NavItem } from '../../config/routes.config';
                matRipple
                role="listitem">
               <span class="nav-icon-wrap" aria-hidden="true">
-                <mat-icon class="nav-icon">{{ item.icon }}</mat-icon>
+                @if (isSpriteIcon(item.icon)) {
+                  <svg class="nav-icon sprite-icon" aria-hidden="true">
+                    <use [attr.xlink:href]="'assets/icons/sprite.svg#' + getSpriteId(item.icon)"></use>
+                  </svg>
+                } @else {
+                  <mat-icon class="nav-icon">{{ item.icon }}</mat-icon>
+                }
               </span>
               @if (!collapsed()) {
                 <span class="nav-label">{{ item.label }}</span>
@@ -80,7 +98,13 @@ import { appNavItems, NavItem } from '../../config/routes.config';
                       matTooltipPosition="right"
                       matRipple>
                 <span class="nav-icon-wrap" aria-hidden="true">
-                  <mat-icon class="nav-icon">{{ item.icon }}</mat-icon>
+                  @if (isSpriteIcon(item.icon)) {
+                    <svg class="nav-icon sprite-icon" aria-hidden="true">
+                      <use [attr.xlink:href]="'assets/icons/sprite.svg#' + getSpriteId(item.icon)"></use>
+                    </svg>
+                  } @else {
+                    <mat-icon class="nav-icon">{{ item.icon }}</mat-icon>
+                  }
                 </span>
                 @if (!collapsed()) {
                   <span class="nav-label">{{ item.label }}</span>
@@ -97,7 +121,13 @@ import { appNavItems, NavItem } from '../../config/routes.config';
                        routerLinkActive="active"
                        matRipple>
                       <span class="nav-icon-wrap" aria-hidden="true">
-                        <mat-icon class="nav-icon child-icon">{{ child.icon }}</mat-icon>
+                        @if (isSpriteIcon(child.icon)) {
+                          <svg class="nav-icon child-icon sprite-icon" aria-hidden="true">
+                            <use [attr.xlink:href]="'assets/icons/sprite.svg#' + getSpriteId(child.icon)"></use>
+                          </svg>
+                        } @else {
+                          <mat-icon class="nav-icon child-icon">{{ child.icon }}</mat-icon>
+                        }
                       </span>
                       <span class="nav-label">{{ child.label }}</span>
                     </a>
@@ -190,6 +220,7 @@ import { appNavItems, NavItem } from '../../config/routes.config';
 
     .nav-icon-wrap { display: flex; flex-shrink: 0; }
     .nav-icon { font-size: 20px; width: 20px; height: 20px; color: var(--app-text-muted); transition: color var(--app-transition); }
+    .sprite-icon { fill: currentColor; stroke: none; transition: fill var(--app-transition); }
 
     .nav-label { flex: 1; }
     .nav-badge { background: var(--app-accent); color: #fff; font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 10px; letter-spacing: 0.5px; }
@@ -217,7 +248,7 @@ import { appNavItems, NavItem } from '../../config/routes.config';
   ]
 })
 export class SidebarComponent {
-  collapsed = signal(false);
+  collapsed = signal(typeof window !== 'undefined' ? window.innerWidth <= 768 : false);
   navItems = appNavItems;
   themeService = inject(ThemeService);
 
@@ -226,5 +257,15 @@ export class SidebarComponent {
       this.collapsed.set(false);
     }
     item.expanded = !item.expanded;
+  }
+
+  isSpriteIcon(icon: string): boolean {
+    if (!icon) return false;
+    return icon.startsWith('sprite:') || SPRITE_ICONS.has(icon);
+  }
+
+  getSpriteId(icon: string): string {
+    if (!icon) return '';
+    return icon.startsWith('sprite:') ? icon.substring(7) : icon;
   }
 }
